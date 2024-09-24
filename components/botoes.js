@@ -1,44 +1,35 @@
-import React from "react";
+import React, {useState} from "react";
 import {TouchableOpacity, StyleSheet, Text} from "react-native";
 
 
-export function BtnAmarelo ({conta, setConta, texto}) { 
-  let handCLick = () =>  {
-    if (texto == "=") {
-      let result = eval(conta);// ternmia aqui pai
-      setConta(conta + texto);
-    } else if (texto == "C") {
-      setConta("0");
-    }
-  }
+export function BtnAmarelo ({texto, onPress}) { 
   return (
-    <TouchableOpacity style={styles.btnAmarelo}> 
+    <TouchableOpacity style={styles.btnAmarelo} onPress={onPress}> 
       <Text style={styles.textoBotao}>{texto}</Text>
     </TouchableOpacity>
   );
 }
 
-export function BtnAzul ({conta, setConta, texto}) {
-
+export function BtnAzul ({texto, onPress}) {
   return (
-    <TouchableOpacity style={styles.btnAzul}> 
+    <TouchableOpacity style={styles.btnAzul} onPress={onPress}> 
       <Text style={styles.textoBotao}>{texto}</Text>
     </TouchableOpacity>
   );
 }
 
-export function BtnRoxo (props) {
+export function BtnRoxo ({texto, onPress}) {
   return (
-    <TouchableOpacity style={styles.btnRoxo}> 
-      <Text style={styles.textoBotao}>{props.texto}</Text>
+    <TouchableOpacity style={styles.btnRoxo} onPress={onPress}> 
+      <Text style={styles.textoBotao}>{texto}</Text>
     </TouchableOpacity>
   );
 }
 
-export function BtnC (props) {
+export function BtnC ({texto, onPress}) {
   return (
-    <TouchableOpacity style={styles.btnC}> 
-      <Text style={styles.textoBotao}>{props.texto}</Text>
+    <TouchableOpacity style={styles.btnC} onPress={onPress}> 
+      <Text style={styles.textoBotao}>{texto}</Text>
     </TouchableOpacity>
   );
 }

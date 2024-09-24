@@ -2,10 +2,27 @@ import { Text, View, StyleSheet } from 'react-native';
 import {BtnAmarelo, BtnRoxo, BtnAzul, BtnC} from "./components/botoes.js";
 import {BoxBtn, BoxPrincipal, BoxResultado} from "./components/boxes.js";
 import {Titulo, Linha, Resultado} from "./components/textos.js";
-import React from "react";
+import React, {useState} from "react";
 
 export default function App() {
-  let [conta, setConta] = React.useState("")
+  let [conta, setConta] = useState("")
+
+  let handClick = (value) =>  {
+    if (value == "=") {
+      resultado()
+    } else if (value == "C") {
+      clear()
+    } else {
+      setConta(conta + value);
+    }
+  }
+  let resultado = () => {
+    const total = new Function('return ' + conta)();
+    setConta(total);
+  }
+  let clear = () => {
+    setConta('');
+  };
   return (
     <BoxPrincipal>
 
@@ -13,31 +30,30 @@ export default function App() {
       <Linha></Linha>
 
       <BoxResultado>
-        <Resultado texto="10 + 10"></Resultado>
+        <Resultado texto={conta}></Resultado>
       </BoxResultado>
 
       <BoxBtn>
-        <BtnAzul conta={conta} setConta={setConta} texto={"0"}></BtnAzul>
-        <BtnAzul conta={conta} setConta={setConta} texto={"1"}></BtnAzul>
-        <BtnAzul conta={conta} setConta={setConta} texto={"2"}></BtnAzul>
-        <BtnAmarelo conta={conta} setConta={setConta} texto="+"></BtnAmarelo>
+        <BtnAzul texto={"1"} onPress={() => handClick("1")}></BtnAzul>
+        <BtnAzul texto={"2"} onPress={() => handClick("2")}></BtnAzul>
+        <BtnAzul texto={"3"} onPress={() => handClick("3")}></BtnAzul>
+        <BtnAmarelo texto="+" onPress={() => handClick("+")}></BtnAmarelo>
 
-        <BtnAzul conta={conta} setConta={setConta} texto={"3"}></BtnAzul>
-        <BtnAzul conta={conta} setConta={setConta} texto={"4"}></BtnAzul>
-        <BtnAzul conta={conta} setConta={setConta} texto={"5"}></BtnAzul>
-        <BtnAmarelo conta={conta} setConta={setConta} texto="-"></BtnAmarelo>
+        <BtnAzul texto={"4"} onPress={() => handClick("4")}></BtnAzul>
+        <BtnAzul texto={"5"} onPress={() => handClick("5")}></BtnAzul>
+        <BtnAzul texto={"6"} onPress={() => handClick("6")}></BtnAzul>
+        <BtnAmarelo texto="-" onPress={() => handClick("-")}></BtnAmarelo>
 
-        <BtnAzul conta={conta} setConta={setConta} texto={"6"}></BtnAzul>
-        <BtnAzul conta={conta} setConta={setConta} texto={"7"}></BtnAzul>
-        <BtnAzul conta={conta} setConta={setConta} texto={"8"}></BtnAzul>
-        <BtnAmarelo conta={conta} setConta={setConta} texto="*"></BtnAmarelo>
+        <BtnAzul texto={"7"} onPress={() => handClick("7")}></BtnAzul>
+        <BtnAzul texto={"8"} onPress={() => handClick("8")}></BtnAzul>
+        <BtnAzul texto={"9"} onPress={() => handClick("9")}></BtnAzul>
+        <BtnAmarelo texto="*" onPress={() => handClick("*")}></BtnAmarelo>
         
-        <BtnC conta={conta} setConta={setConta} texto="C"></BtnC>
-        <BtnAzul conta={conta} setConta={setConta} texto={"9"}></BtnAzul>
-        <BtnRoxo conta={conta} setConta={setConta} texto="="></BtnRoxo>
-        <BtnAmarelo conta={conta} setConta={setConta} texto={"/"}></BtnAmarelo>
+        <BtnC texto="C" onPress={() => handClick("C")}></BtnC>
+        <BtnAzul texto={"0"} onPress={() => handClick("0")}></BtnAzul>
+        <BtnRoxo texto="=" onPress={() => handClick("=")}></BtnRoxo>
+        <BtnAmarelo texto={"/"} onPress={() => handClick("/")}></BtnAmarelo>
       </BoxBtn>
-
     </BoxPrincipal>
   );
 }
